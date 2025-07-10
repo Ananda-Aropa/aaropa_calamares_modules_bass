@@ -15,15 +15,15 @@ override_dh_auto_configure:
 	./debian/prepare.sh
 
 # Keep modules only
-override_dh_auto_install:
-	dh_auto_install -- || :
+override_dh_installdeb:
 	- rm -rf \
 		$(DESTDIR)/usr/bin \
 		$(DESTDIR)/usr/include \
 		$(DESTDIR)/usr/share \
 		$(DESTDIR)/usr/lib/*/cmake \
 		$(DESTDIR)/usr/lib/*/lib* \
-		$(DESTDIR)/usr/lib/*/calamares/lib* 
+		$(DESTDIR)/usr/lib/*/calamares/lib*
+	dh_installdeb --
 
 # Some test don't work well, we don't need to run them at package build time.
 override_dh_auto_test:
