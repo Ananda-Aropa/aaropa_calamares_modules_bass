@@ -1,0 +1,31 @@
+#!/usr/bin/make -f
+
+# Hardening options, see: https://wiki.debian.org/Hardening
+export DEB_BUILD_MAINT_OPTIONS=hardening=+all
+
+# Help makes build paths reproducible
+export DEB_BUILD_MAINT_OPTIONS=buildinfo=+path
+
+DESTDIR := debian/aaropa-calamares-extensions-bass
+
+%:
+	dh $@ --with kf6
+
+override_dh_auto_configure:
+	./debian/prepare.sh
+
+# Keep modules only
+override_dh_auto_install:
+	dh_auto_install -- || :
+	- rm -rf \
+		$(DESTDIR)/usr/{include,share,bin} \
+		$(DESTDIR)/usr/lib/cmake \
+		$(DESTDIR)/usr/lib/*/cmake \
+		$(DESTDIR)/usr/lib/lib* \
+		$(DESTDIR)/usr/lib/calamares/lib* 
+
+# Some test don't work well, we don't need to run them at package build time.
+override_dh_auto_test:
+
+# Skip tasks that are known to fail
+override_dh_dwz:

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <author>
+  SPDX-FileCopyrightText: 2025 Bùi Gia Viện &lt;shadichy@blisslabs.org&gt;
+  SPDX-License-Identifier: GPL-3.0-or-later
+ </author>
+ <class>Page_Presets</class>
+ <widget class="QWidget" name="Page_Presets">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>997</width>
+    <height>474</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string />
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
+    <widget class="QLabel" name="label">
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <widget class="QLabel" name="warn">
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
+    </widget>
+   </item>
+   <item>
+		<widget class="QWidget" name="container">
+		 <layout class="QVBoxLayout" name="presets_layout">
+     </layout>
+		</widget>
+   </item>
+  </layout>
+ </widget>
+ <resources />
+ <connections />
+</ui>
