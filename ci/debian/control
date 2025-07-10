@@ -68,13 +68,12 @@ Depends: os-prober,
   qml6-module-qtquick-layouts,
   ${shlibs:Depends},
   ${misc:Depends},
-Provides: calamares
-Conflicts: calamares
+Depends: calamares
 Description: distribution-independent installer framework
   Calamares is a distribution-independent installer framework.
   .
   This is the re-branded version of calamares, made specifically
-  for BlissOS live installer.
+  for BassOS live installer.
   .
   It provides a graphical installer that can be used with nearly
   any distribution. This package is suitable for live media on
