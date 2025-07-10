@@ -61,14 +61,14 @@ Vcs-Git: https://github.com/BlissOS/aaropa_calamares.git
 Package: aaropa-calamares-extensions-bass
 Architecture: linux-any
 Multi-Arch: foreign
-Depends: os-prober,
+Depends: calamares,
+  os-prober,
   rsync,
   qml6-module-qtquick,
   qml6-module-qtquick-controls,
   qml6-module-qtquick-layouts,
   ${shlibs:Depends},
   ${misc:Depends},
-Depends: calamares
 Description: distribution-independent installer framework
   Calamares is a distribution-independent installer framework.
   .
