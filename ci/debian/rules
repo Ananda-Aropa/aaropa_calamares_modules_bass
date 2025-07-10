@@ -18,11 +18,12 @@ override_dh_auto_configure:
 override_dh_auto_install:
 	dh_auto_install -- || :
 	- rm -rf \
-		$(DESTDIR)/usr/{include,share,bin} \
-		$(DESTDIR)/usr/lib/cmake \
+		$(DESTDIR)/usr/bin \
+		$(DESTDIR)/usr/include \
+		$(DESTDIR)/usr/share \
 		$(DESTDIR)/usr/lib/*/cmake \
-		$(DESTDIR)/usr/lib/lib* \
-		$(DESTDIR)/usr/lib/calamares/lib* 
+		$(DESTDIR)/usr/lib/*/lib* \
+		$(DESTDIR)/usr/lib/*/calamares/lib* 
 
 # Some test don't work well, we don't need to run them at package build time.
 override_dh_auto_test:
