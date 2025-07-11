@@ -42,6 +42,8 @@ public:
     Section selectedSection() const { return m_sections.at( m_selected ); }
     void setSelectedSection( int index ) { m_selected = index; }
 
+    bool nextEnabled() const { return m_nextEnabled; }
+
     /** @brief Write the selected option lists to global storage
      *
      * Since the config doesn't know what module it is for,
@@ -54,6 +56,10 @@ Q_SIGNALS:
     void subtitleLabelChanged( QString label );
     void sidebarLabelChanged( QString label );
     void statusReady();
+    void nextReady();
+
+public Q_SLOTS:
+    void setNextEnabled();
 
 private Q_SLOTS:
     void retranslate();
@@ -66,6 +72,7 @@ private:
 
     QList< Section > m_sections = {};
     int m_selected = 0;
+    bool m_nextEnabled = false;
 };
 
 #endif

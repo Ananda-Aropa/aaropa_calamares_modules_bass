@@ -54,6 +54,7 @@ PresetsPage::onSectionClicked( SectionItem* widget )
         w->setSelected( w == widget );
     }
     m_config->setSelectedSection( m_widgets.indexOf( widget ) );
+		m_config->setNextEnabled();
 }
 
 void

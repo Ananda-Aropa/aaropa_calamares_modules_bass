@@ -56,6 +56,12 @@ Config::loadingDone()
     emit statusReady();
 }
 
+void
+Config::setNextEnabled()
+{
+    m_nextEnabled = true;
+    emit nextReady();
+}
 
 void
 Config::setConfigurationMap( const QVariantMap& configurationMap )
@@ -98,7 +104,7 @@ Config::finalizeGlobalStorage()
     if ( gs )
     {
         QVariantMap m;
-        m.insert( "selection", m_sections.at( m_selected ).target());
+        m.insert( "selection", m_sections.at( m_selected ).target() );
         gs->insert( "presets", m );
     }
 }

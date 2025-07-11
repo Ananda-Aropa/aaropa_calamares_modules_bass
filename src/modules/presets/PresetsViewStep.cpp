@@ -25,9 +25,9 @@ CALAMARES_PLUGIN_FACTORY_DEFINITION( PresetsViewStepFactory, registerPlugin< Pre
 PresetsViewStep::PresetsViewStep( QObject* parent )
     : Calamares::ViewStep( parent )
     , m_widget( new PresetsPage( &m_config ) )
-    , m_nextEnabled( true )
+    , m_nextEnabled( false )
 {
-    connect( &m_config, &Config::statusReady, this, &PresetsViewStep::nextIsReady );
+    connect( &m_config, &Config::nextReady, this, &PresetsViewStep::nextIsReady );
 }
 
 PresetsViewStep::~PresetsViewStep()
@@ -55,7 +55,7 @@ PresetsViewStep::widget()
 bool
 PresetsViewStep::isNextEnabled() const
 {
-    return true;
+    return m_nextEnabled;
 }
 
 
