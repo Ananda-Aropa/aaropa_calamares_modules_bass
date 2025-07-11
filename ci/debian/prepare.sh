@@ -7,6 +7,7 @@ done
 
 # Modules to build:
 _modules="
+	bassoptions
 	presets
 	"
 
