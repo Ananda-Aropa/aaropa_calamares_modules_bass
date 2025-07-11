@@ -12,7 +12,7 @@
 
 #include "section.h"
 
-QPixmap
+static QPixmap
 loadSvgAsPixmap( const QString& filePath, QSize size = QSize( 128, 128 ) )
 {
     QSvgRenderer svg( filePath );
