@@ -196,6 +196,16 @@ OptionModel::data( const QModelIndex& index, int role ) const
     }
 
     OptionTreeItem* item = static_cast< OptionTreeItem* >( index.internalPointer() );
+    if ( !item )
+    {
+        return QVariant();
+    }
+
+    if ( item->isHidden() )
+    {
+        return QVariant();
+    }
+
     switch ( role )
     {
     case Qt::CheckStateRole:
@@ -300,7 +310,19 @@ OptionModel::setSelections( const QStringList& selectNames )
 OptionTreeItem::List
 OptionModel::getOptions() const
 {
-    return m_rootItem ? getItemOptions( m_rootItem ) : OptionTreeItem::List();
+    if ( !m_rootItem )
+    {
+        return OptionTreeItem::List();
+    }
+    auto items = getItemOptions( m_rootItem );
+    for ( auto item : m_hiddenItems )
+    {
+        if ( item->hiddenSelected() )
+        {
+            items.append( getItemOptions( item ) );
+        }
+    }
+    return items;
 }
 
 OptionTreeItem::List
@@ -401,8 +423,15 @@ OptionModel::setupModelData( const QVariantList& groupList, OptionTreeItem* pare
                 }
             }
         }
-        item->setCheckable( true );
-        parent->appendChild( item );
+        if ( item->isHidden() )
+        {
+            m_hiddenItems.append( item );
+        }
+        else
+        {
+            item->setCheckable( true );
+            parent->appendChild( item );
+        }
     }
 }
 

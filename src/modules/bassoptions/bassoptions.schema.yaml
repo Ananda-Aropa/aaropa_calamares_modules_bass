@@ -13,6 +13,7 @@ definitions:
             name: { type: string }
             description: { type: string }
             selected: { type: boolean, default: false }
+            hidden: { type: boolean, default: false }
             editable: { type: boolean, default: false }
             default: { type: string }
         required: [name, description]
@@ -84,3 +85,6 @@ oneOf:
 
     - # Groups file bare
       { $ref: "#/definitions/groups" }
+
+    - # Root level option itself
+      { $ref: "#/definitions/option" }

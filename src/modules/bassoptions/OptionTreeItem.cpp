@@ -44,6 +44,7 @@ OptionTreeItem::OptionTreeItem( const QString& optionName, OptionTreeItem* paren
     , m_name( optionName )
     , m_optionName( optionName )
     , m_selected( parentCheckState( parent ) )
+    , m_isHidden( parent ? parent->isHidden() : false )
     , m_description( optionName )
     , m_showReadOnly( parent ? parent->isImmutable() : false )
 {
@@ -53,7 +54,7 @@ OptionTreeItem::OptionTreeItem( const QVariantMap& groupData, OptionTag&& parent
     : m_parentItem( parent.parent )
     , m_name( Calamares::getString( groupData, "name" ) )
     , m_optionName( Calamares::getString( groupData, "name" ) )
-    , m_isHidden( isHiddenException() || Calamares::getBool( groupData, "hidden", false ) )
+    , m_isHidden( isHiddenException() || Calamares::getBool( groupData, "hidden", parent.parent && parent.parent->isHidden() ) )
     , m_selected( Calamares::getBool( groupData, "selected", false ) ? Qt::Checked : parentCheckState( parent.parent ) )
     , m_description( Calamares::getString( groupData, "description" ) )
     , m_editable( Calamares::getBool( groupData, "editable", false ) )
@@ -68,8 +69,8 @@ OptionTreeItem::OptionTreeItem( const QVariantMap& groupData, GroupTag&& parent 
     : m_parentItem( parent.parent )
     , m_name( Calamares::getString( groupData, "name" ) )
     , m_optionName( Calamares::getString( groupData, "name" ) )
-    , m_isHidden( isHiddenException() || Calamares::getBool( groupData, "hidden", false ) )
-    , m_selected( parentCheckState( parent.parent ) )
+    , m_isHidden( isHiddenException() || Calamares::getBool( groupData, "hidden", parent.parent && parent.parent->isHidden() ) )
+    , m_selected( Calamares::getBool( groupData, "selected", false ) ? Qt::Checked : parentCheckState( parent.parent ) )
     , m_description( Calamares::getString( groupData, "description" ) )
     , m_preScript( Calamares::getString( groupData, "pre-install" ) )
     , m_postScript( Calamares::getString( groupData, "post-install" ) )
@@ -185,14 +186,7 @@ bool
 OptionTreeItem::isHiddenException() const
 {
     Calamares::GlobalStorage* gs = Calamares::JobQueue::instance()->globalStorage();
-    if ( m_description.contains( "DATA=" ) )
-    {
-        return gs->value( "partitions" ).toString().contains( "/data" );
-    }
-    else
-    {
-        return false;
-    }
+    return false;
 }
 
 void

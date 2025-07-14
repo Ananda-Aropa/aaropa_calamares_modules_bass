@@ -98,6 +98,7 @@ private:
     std::function<void(bool)> m_nextUpdateCall{};
 
     OptionTreeItem* m_rootItem = nullptr;
+    OptionTreeItem::List m_hiddenItems;
 };
 
 #endif  // BASSOPTIONS_MODEL_H
