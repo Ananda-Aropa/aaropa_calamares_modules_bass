@@ -328,6 +328,11 @@ OptionModel::getOptions() const
 OptionTreeItem::List
 OptionModel::getItemOptions( OptionTreeItem* item ) const
 {
+    if ( item->isOption() )
+    {
+        return { item };
+    }
+
     OptionTreeItem::List selectedOptions;
     for ( int i = 0; i < item->childCount(); i++ )
     {
