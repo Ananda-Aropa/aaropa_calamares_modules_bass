@@ -54,7 +54,7 @@ PresetsPage::onSectionClicked( SectionItem* widget )
         w->setSelected( w == widget );
     }
     m_config->setSelectedSection( m_widgets.indexOf( widget ) );
-		m_config->setNextEnabled();
+    m_config->setNextEnabled();
 }
 
 void
@@ -66,8 +66,24 @@ PresetsPage::showSelections()
     mainLayout->setContentsMargins( 10, 10, 10, 10 );
 
     int count = sections.size();
-    int rows = qCeil( count / 3.0 );
-    int perRow = qCeil( count / static_cast< double >( rows ) );
+    int rows;
+    int perRow;
+    if ( count < 4 )
+    {
+        rows = 1;
+        perRow = count;
+    }
+    else if ( count == 4 )
+    {
+        rows = 2;
+        perRow = 2;
+    }
+    else
+    {
+        rows = qCeil( count / 3.0 );
+        perRow = 3;
+    }
+
     int index = 0;
 
     for ( int r = 0; r < rows; ++r )
